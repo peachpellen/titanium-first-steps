@@ -1,0 +1,1 @@
+/Users/peachpellen/Documents/Titanium Studio Workspace/titanium-first-steps/Resources/app.js

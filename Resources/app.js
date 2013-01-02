@@ -1,44 +1,33 @@
-/*
- * Single Window Application Template:
- * A basic starting point for your application.  Mostly a blank canvas.
- * 
- * In app.js, we generally take care of a few things:
- * - Bootstrap the application with any data we need
- * - Check for dependencies like device type, platform version or network connection
- * - Require and open our top-level UI component
- *  
- */
+// Hide the status bar
+Titanium.UI.iPhone.hideStatusBar()
 
-//bootstrap and check dependencies
-if (Ti.version < 1.8 ) {
-	alert('Sorry - this application template requires Titanium Mobile SDK 1.8 or later');	  	
+// this sets the background color of the master UIView (when there are no windows/tab groups on it)
+Titanium.UI.setBackgroundColor("#f00");
+
+// create a new window called "screen1" and make the background color light blue
+var screen1 = Titanium.UI.createWindow({
+	backgroundColor: "#0df"
+})
+
+// create a new button called "button" and set width, height and top. It will be centered on x by default
+var button = Titanium.UI.createButton({
+	title: "Press Me",
+	top: "80%",
+	width: 100,
+	height: 50
+})
+
+// function for when the button is pressed
+pressButton = function (event)
+{
+	// this is a print statement
+	Titanium.API.info("User clicked the button")
 }
+// add the event listener to the button
+button.addEventListener("click", pressButton)
 
-// This is a single context application with multiple windows in a stack
-(function() {
-	//render appropriate components based on the platform and form factor
-	var osname = Ti.Platform.osname,
-		version = Ti.Platform.version,
-		height = Ti.Platform.displayCaps.platformHeight,
-		width = Ti.Platform.displayCaps.platformWidth;
-	
-	//considering tablet to have one dimension over 900px - this is imperfect, so you should feel free to decide
-	//yourself what you consider a tablet form factor for android
-	var isTablet = osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899));
-	
-	var Window;
-	if (isTablet) {
-		Window = require('ui/tablet/ApplicationWindow');
-	}
-	else {
-		// Android uses platform-specific properties to create windows.
-		// All other platforms follow a similar UI pattern.
-		if (osname === 'android') {
-			Window = require('ui/handheld/android/ApplicationWindow');
-		}
-		else {
-			Window = require('ui/handheld/ApplicationWindow');
-		}
-	}
-	new Window().open();
-})();
+// add the button to screen1
+screen1.add(button)
+
+// open screen1
+screen1.open()
